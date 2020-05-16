@@ -7,7 +7,7 @@ This project is self-hosted; it was bootstraped and is built using an older vers
 ## Create
 
 ```bash
-npx @jayphelps/react-scripts create my-project-name
+npx @jayphelps/jay-scripts create my-project-name
 cd my-project-name
 ```
 
@@ -15,10 +15,14 @@ cd my-project-name
 
 ```bash
 yarn start
+# or
+npx jay-scripts start
 ```
 
 ## Build
 
 ```bash
 yarn build
+# or
+npx jay-scripts build
 ```
