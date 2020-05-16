@@ -65,7 +65,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 `;
+const readmeGen = (name: string) => `
+# ${name}
+[![npm version](https://img.shields.io/npm/v/${name}.svg)](https://www.npmjs.com/package/${name})
+[![npm downloads](https://img.shields.io/npm/dm/${name}.svg)](https://www.npmjs.com/package/${name})
 
+## Install
+
+\`\`\`console
+npm install --save ${name}
+# or
+yarn add ${name}
+
+:shipit:
+`;
 const tsconfig = {
   extends: '@jayphelps/jay-scripts/configs/tsconfig.json',
 };
@@ -102,10 +115,6 @@ async function createProject(name: string) {
     initial: '',
   });
 
-  // This is done this way instead of spreading so that the key order is still
-  // the same when it's stringified to JSON!
-  Object.assign(packageJson, { name, version, description });
-
   const { github } = await prompts({
     name: 'github',
     type: 'text',
@@ -113,20 +122,29 @@ async function createProject(name: string) {
     initial: `jayphelps/${nameWithoutNamespace}`,
   });
 
-  if (github) {
-    packageJson.repository = {
-      type: 'git',
-      url: `git+https://github.com/${github}.git`,
-    };
+  const repository = {
+    type: 'git',
+    url: `git+https://github.com/${github}.git`,
+  };
+  const bugs = {
+    url: `https://github.com/${github}/issues`,
+  };
+  const homepage = `https://github.com/${github}/`;
 
-    packageJson.bugs = {
-      url: `https://github.com/${github}/issues`,
-    };
-
-    packageJson.homepage = `https://github.com/${github}/`;
-  }
+  // This is done this way instead of { ...spreading } so that the original
+  // key order is still maintained when  it's stringified to JSON.
+  Object.assign(packageJson, {
+    name,
+    version,
+    description,
+    repository,
+    bugs,
+    homepage,
+  });
 
   const projectDirPath = path.resolve(nameWithoutNamespace);
+
+  // TODO: prolly should just bite the bullet and use Yeoman...
 
   /* /project */
   fs.mkdirSync(projectDirPath);
@@ -143,7 +161,7 @@ async function createProject(name: string) {
     prettierconfig,
   );
   fs.writeFileSync(path.join(projectDirPath, '.gitignore'), gitignore);
-  fs.writeFileSync(path.join(projectDirPath, 'README.md'), `# ${name}\n`);
+  fs.writeFileSync(path.join(projectDirPath, 'README.md'), readmeGen(name));
   fs.writeFileSync(path.join(projectDirPath, 'LICENSE'), license);
 
   /* /project/src */
