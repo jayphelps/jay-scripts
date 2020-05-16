@@ -1,0 +1,59 @@
+{
+  "name": "@jayphelps/jay-scripts",
+  "version": "0.0.27",
+  "description": "Common npm package management utilities used by Jay Phelps. Mostly just boilerplate for tsc + babel with esm/cjs output.",
+  "author": "Jay Phelps <hello@jayphelps.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/jayphelps/jay-scripts/",
+  "bugs": {
+    "url": "https://github.com/jayphelps/jay-scripts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayphelps/jay-scripts.git"
+  },
+  "bin": {
+    "jay-scripts": "./bin/jay-scripts.js"
+  },
+  "main": "./dist/cjs/index.js",
+  "type": "module",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js",
+    "./configs/babel.config.js": "./configs/babel.config.js",
+    "./configs/tsconfig.json": "./configs/tsconfig.json"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "configs",
+    "plugins"
+  ],
+  "scripts": {
+    "start": "jay-scripts start",
+    "build": "jay-scripts build",
+    "test": "jay-scripts test"
+  },
+  "devDependencies": {
+    "@jayphelps/jay-scripts": "^0.0.24",
+    "@types/node": "^14.0.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-syntax-import-meta": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/cross-spawn": "^6.0.2",
+    "@types/prompts": "^2.0.8",
+    "commander": "^5.1.0",
+    "cross-spawn": "^7.0.2",
+    "jest": "^26.0.1",
+    "pkg-dir": "^4.2.0",
+    "prettier": "^2.0.5",
+    "prompts": "^2.3.2",
+    "resolve-bin": "^0.4.0",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
+  }
+}

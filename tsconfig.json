@@ -1,0 +1,3 @@
+{
+  "extends": "@jayphelps/jay-scripts/configs/tsconfig.json"
+}
