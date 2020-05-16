@@ -189,7 +189,7 @@ export default async function create(name: string): Promise<void> {
     await createProject(name);
   } catch (e) {
     console.error(e);
-    console.log('Creating a new project failed.');
+    console.error('Creating a new project failed.');
     process.exit(1);
   }
 }
