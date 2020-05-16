@@ -89,7 +89,7 @@ async function createProject(name: string) {
     message: 'version:',
     validate: (value: string) => {
       // Naive cause I don't need it more complex.
-      return !!value.match(/[0-9]\.[0-9]\.[0-9]/);
+      return !!value.match(/^[0-9]\.[0-9]\.[0-9]$/);
     },
     initial: '0.0.0',
   });

@@ -2,13 +2,6 @@ import { CommandConfig } from '../../CommandConfig';
 
 export default {
   command: 'build',
-  description: 'TODO',
-  options: [
-    {
-      flag: '-p, --pizza-type <number>',
-      description: 'I like pizza',
-      required: false,
-      default: 'cheese'
-    }
-  ]
+  description: 'Typecheck and build the project, writing to ./dist/{cjs,esm}',
+  options: [],
 } as CommandConfig;

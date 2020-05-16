@@ -2,6 +2,6 @@ import { CommandConfig } from '../../CommandConfig';
 
 export default {
   command: 'start',
-  description: 'Start a local development',
+  description: 'Build and watch project',
   options: [],
 } as CommandConfig;
