@@ -82,6 +82,7 @@ const indexts = 'console.log("hello world!");\n';
 async function createProject(name: string) {
   // If an @namespace isn't used this just returns the original unmodified.
   const nameWithoutNamespace = name.replace(/^@\S+\/(\S+)$/, '$1');
+  const packageJson = { ...packageJsonDefaults };
 
   const { version } = await prompts({
     name: 'version',
@@ -101,18 +102,16 @@ async function createProject(name: string) {
     initial: '',
   });
 
-  const { github } = await prompts({
-    name: 'github',
-    type: 'text',
-    message: 'org/username:',
-    initial: `jayphelps/${nameWithoutNamespace}`,
-  });
-
-  const packageJson = { ...packageJsonDefaults };
-
   // This is done this way instead of spreading so that the key order is still
   // the same when it's stringified to JSON!
   Object.assign(packageJson, { name, version, description });
+
+  const { github } = await prompts({
+    name: 'github',
+    type: 'text',
+    message: 'Github org/username:',
+    initial: `jayphelps/${nameWithoutNamespace}`,
+  });
 
   if (github) {
     packageJson.repository = {
