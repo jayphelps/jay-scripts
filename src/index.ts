@@ -52,7 +52,7 @@ export async function main(argv: string[]) {
         const { default: action } = await import(
           `${COMMANDS_DIR_URL}/${dir.name}/${dir.name}.js`
         );
-        action(...args);
+        await action(...args);
       });
   }
 
