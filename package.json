@@ -1,6 +1,6 @@
 {
   "name": "@jayphelps/jay-scripts",
-  "version": "0.0.29",
+  "version": "0.0.32",
   "description": "Common npm package management utilities used by Jay Phelps. Mostly just boilerplate for tsc + babel with esm/cjs output.",
   "author": "Jay Phelps <hello@jayphelps.com>",
   "license": "MIT",
@@ -35,12 +35,14 @@
     "test": "jay-scripts test"
   },
   "devDependencies": {
-    "@jayphelps/jay-scripts": "^0.0.27",
+    "@jayphelps/jay-scripts": "^0.0.31",
+    "@types/fs-extra": "^9.0.1",
     "@types/node": "^14.0.1"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-syntax-import-meta": "^7.8.3",
     "@babel/plugin-transform-modules-commonjs": "^7.9.6",
     "@babel/preset-typescript": "^7.9.0",
@@ -48,6 +50,7 @@
     "@types/prompts": "^2.0.8",
     "commander": "^5.1.0",
     "cross-spawn": "^7.0.2",
+    "fs-extra": "^9.0.1",
     "jest": "^26.0.1",
     "pkg-dir": "^4.2.0",
     "prettier": "^2.0.5",
