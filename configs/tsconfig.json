@@ -6,9 +6,9 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "jsx": "preserve",
-    "noEmit": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "strict": true,
-    "typeRoots": ["types"],
-    "types": ["node"]
+    "lib": ["ESNext"]
   }
 }

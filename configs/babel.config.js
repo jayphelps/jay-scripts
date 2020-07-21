@@ -3,6 +3,9 @@ import { babelAddImportFileExtensionPlugin } from '../plugins/babel/babel-plugin
 export default {
   presets: ['@babel/preset-typescript'],
   plugins: [
+    // Webpack doesn't yet support class fields because acorn doesn't.
+    // https://github.com/webpack/webpack/issues/10216
+    '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-import-meta',
     babelAddImportFileExtensionPlugin,
   ],

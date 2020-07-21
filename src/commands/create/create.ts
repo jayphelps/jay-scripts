@@ -80,6 +80,7 @@ yarn add ${name}
 :shipit:
 `;
 const tsconfig = {
+  include: ['src'],
   extends: '@jayphelps/jay-scripts/configs/tsconfig.json',
 };
 const prettierconfig = `module.exports = {
