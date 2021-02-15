@@ -7,9 +7,11 @@ import pkgDir from 'pkg-dir';
 import { runCommands } from '../../utils/runCommands';
 
 function resolveBin(name: string) {
-  return crossSpawn
-    .sync('yarn', ['bin', name], { encoding: 'utf8' })
-    .stdout.slice(0, -1); // remove trailing newline
+  const binPath = crossSpawn
+    .sync('npm', ['bin', name], { encoding: 'utf8' })
+    .stdout.slice(0, -1); // remove trailing newline;
+  console.log({ binPath });
+  return path.join(binPath, name);
 }
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -21,13 +23,11 @@ const esmConfigPath = path.join(configsPath, 'babel.config.js');
 const esmDistPath = path.join('dist', 'esm');
 const cjsConfigPath = path.join(configsPath, 'babel.config.cjs.js');
 const cjsDistPath = path.join('dist', 'cjs');
-const babelBinPath = resolveBin('babel');
-const tscBinPath = resolveBin('tsc');
-const babelCommand = `${babelBinPath} src --source-maps --extensions .js,.ts,.jsx,.tsx`;
+const babelCommand = `babel src --source-maps --extensions .js,.ts,.jsx,.tsx`;
 
 export const babelEsmCommand = `${babelCommand} --out-dir ${esmDistPath} --config-file "${esmConfigPath}"`;
 export const babelCjsCommand = `${babelCommand} --out-dir ${cjsDistPath} --config-file "${cjsConfigPath}"`;
-export const tscCommand = `${tscBinPath} --project tsconfig.json --declarationDir "${cjsDistPath}"`;
+export const tscCommand = `tsc --project tsconfig.json --declarationDir "${cjsDistPath}"`;
 
 export const commands = [babelEsmCommand, babelCjsCommand, tscCommand];
 

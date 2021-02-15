@@ -1,42 +1,21 @@
-import crossSpawn from 'cross-spawn';
-
-const unixShell = {
-  shell: process.env.SHELL || 'sh',
-  flag: '-c',
-};
-
-const win32Shell = {
-  shell: process.env.SHELL || 'cmd',
-  flag: '/c',
-};
-
-const { shell, flag } = process.platform === 'win32' ? win32Shell : unixShell;
+import npmRun from 'npm-run';
 
 function spawnWithPromise(cmd: string) {
-  return new Promise((resolve, reject) => {
-    const childProcess = crossSpawn(shell, [flag, cmd], {
-      cwd: process.cwd(),
-      env: process.env,
-      stdio: ['inherit', 'inherit', 'inherit'],
-    });
-
-    childProcess.once('exit', (code, signal) => {
-      if (code !== null && code !== 0) {
-        reject(new Error(`Exited with code ${code}, signal: ${signal}`));
+  return new Promise<string>((resolve, reject) => {
+    npmRun(cmd, {}, (err, stdout, stderr) => {
+      if (err) {
+        reject(err);
         return;
       }
-      resolve();
-    });
 
-    childProcess.once('error', (err) => {
-      reject(err);
+      resolve(stdout.toString());
     });
   });
 }
 
 export async function runCommands(
   cmds: string[],
-  options: { parallel: boolean } = { parallel: false }
+  options: { parallel: boolean } = { parallel: false },
 ) {
   if (options.parallel) {
     const childProcesses = cmds.map((cmd) => spawnWithPromise(cmd));
